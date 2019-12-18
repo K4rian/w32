@@ -29,7 +29,7 @@ var (
 	procTranslateMessage              = moduser32.NewProc("TranslateMessage")
 	procDispatchMessage               = moduser32.NewProc("DispatchMessageW")
 	procSendMessage                   = moduser32.NewProc("SendMessageW")
-	procSendMessageTimeout            = moduser32.NewProc("SendMessageTimeout")
+	procSendMessageTimeout            = moduser32.NewProc("SendMessageTimeoutW")
 	procPostMessage                   = moduser32.NewProc("PostMessageW")
 	procWaitMessage                   = moduser32.NewProc("WaitMessage")
 	procSetWindowText                 = moduser32.NewProc("SetWindowTextW")
@@ -121,6 +121,8 @@ var (
 	procSetTimer                      = moduser32.NewProc("SetTimer")
 	procKillTimer                     = moduser32.NewProc("KillTimer")
 	procRedrawWindow                  = moduser32.NewProc("RedrawWindow")
+	procGetActiveWindow               = moduser32.NewProc("GetActiveWindow")
+	procGetAncestor                   = moduser32.NewProc("GetAncestor")
 )
 
 func RegisterClassEx(wndClassEx *WNDCLASSEX) ATOM {
@@ -314,13 +316,15 @@ func SendMessage(hwnd HWND, msg uint32, wParam, lParam uintptr) uintptr {
 }
 
 func SendMessageTimeout(hwnd HWND, msg uint32, wParam, lParam uintptr, fuFlags, uTimeout uint32) uintptr {
+	var lpdwResult uintptr
 	ret, _, _ := procSendMessageTimeout.Call(
 		uintptr(hwnd),
 		uintptr(msg),
 		wParam,
 		lParam,
 		uintptr(fuFlags),
-		uintptr(uTimeout))
+		uintptr(uTimeout),
+		lpdwResult)
 
 	return ret
 }
@@ -1043,4 +1047,17 @@ func RedrawWindow(hWnd HWND, lpRect *RECT, hrgnUpdate HRGN, flag uint32) {
 		panic("RedrawWindow fail")
 	}
 	return
+}
+
+func GetActiveWindow() HWND {
+	ret, _, _ := procGetActiveWindow.Call()
+	return HWND(ret)
+}
+
+func GetAncestor(hwnd HWND, gaFlags uint32) HWND {
+	ret, _, _ := procGetAncestor.Call(
+		uintptr(hwnd),
+		uintptr(gaFlags))
+
+	return HWND(ret)
 }

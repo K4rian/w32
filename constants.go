@@ -1662,6 +1662,56 @@ const (
 	ILC_HIGHQUALITYSCALE = 0x00020000
 )
 
+// ListView Header item info
+const (
+	HDI_WIDTH      = 0x1
+	HDI_HEIGHT     = HDI_WIDTH
+	HDI_TEXT       = 0x2
+	HDI_FORMAT     = 0x4
+	HDI_LPARAM     = 0x8
+	HDI_BITMAP     = 0x10
+	HDI_IMAGE      = 0x20
+	HDI_DI_SETITEM = 0x40
+	HDI_ORDER      = 0x80
+	HDI_FILTER     = 0x100
+	HDI_STATE      = 0x0200
+)
+
+// ListView Header formats
+const (
+	HDF_LEFT            = 0x0
+	HDF_RIGHT           = 0x1
+	HDF_CENTER          = 0x2
+	HDF_JUSTIFYMASK     = 0x3
+	HDF_RTLREADING      = 0x4
+	HDF_OWNERDRAW       = 0x8000
+	HDF_STRING          = 0x4000
+	HDF_BITMAP          = 0x2000
+	HDF_BITMAP_ON_RIGHT = 0x1000
+	HDF_IMAGE           = 0x800
+	HDF_SORTUP          = 0x400
+	HDF_SORTDOWN        = 0x200
+	HDF_CHECKBOX        = 0x40
+	HDF_CHECKED         = 0x80
+	HDF_FIXEDWIDTH      = 0x100
+	HDF_SPLITBUTTON     = 0x1000000
+)
+
+// ListView Header state info
+const (
+	HDIS_FOCUSED = 0x1
+)
+
+// ListView Header messages
+const (
+	HDM_FIRST        = 0x1200
+	HDM_GETITEMCOUNT = (HDM_FIRST + 0)
+	HDM_INSERTITEM   = (HDM_FIRST + 10)
+	HDM_GETITEM      = (HDM_FIRST + 11)
+	HDM_SETITEM      = (HDM_FIRST + 12)
+	HDM_LAYOUT       = (HDM_FIRST + 5)
+)
+
 // Keystroke Message Flags
 const (
 	KF_EXTENDED = 0x0100
@@ -2613,16 +2663,23 @@ const (
 
 // RedrawWindow Flags
 const (
-	RDW_ERASE = 4
-	RDW_ALLCHILDREN = 0x80
-	RDW_ERASENOW = 0x200
-	RDW_FRAME = 0x400
-	RDW_INTERNALPAINT = 2
-	RDW_INVALIDATE = 1
-	RDW_NOCHILDREN = 0x40
-	RDW_NOERASE = 0x20
-	RDW_NOFRAME = 0x800
+	RDW_ERASE           = 4
+	RDW_ALLCHILDREN     = 0x80
+	RDW_ERASENOW        = 0x200
+	RDW_FRAME           = 0x400
+	RDW_INTERNALPAINT   = 2
+	RDW_INVALIDATE      = 1
+	RDW_NOCHILDREN      = 0x40
+	RDW_NOERASE         = 0x20
+	RDW_NOFRAME         = 0x800
 	RDW_NOINTERNALPAINT = 0x10
-	RDW_UPDATENOW = 0x100
-	RDW_VALIDATE = 8
+	RDW_UPDATENOW       = 0x100
+	RDW_VALIDATE        = 8
+)
+
+// GetAncestor flags
+const (
+	GA_PARENT    = 1
+	GA_ROOT      = 2
+	GA_ROOTOWNER = 3
 )

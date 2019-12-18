@@ -512,6 +512,22 @@ type NMHDR struct {
 	Code     uint32
 }
 
+// https://docs.microsoft.com/en-us/windows/win32/api/commctrl/ns-commctrl-hditemw
+type HDITEM struct {
+	Mask       uint32
+	Cxy        int32
+	PszText    *uint16
+	Hbm        HBITMAP
+	CchTextMax int32
+	Fmt        int32
+	LParam     uintptr
+	IImage     int32
+	IOrder     int32
+	Type       uint32
+	PvFilter   LPARAM
+	State      uint32
+}
+
 // http://msdn.microsoft.com/en-us/library/windows/desktop/bb774743.aspx
 type LVCOLUMN struct {
 	Mask       uint32
